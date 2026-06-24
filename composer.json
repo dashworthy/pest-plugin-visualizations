@@ -1,0 +1,48 @@
+{
+    "name": "dashworthy/pest-plugin-visualizations",
+    "description": "Pest plugin for testing Dashworthy visualizations — DataGrids, Charts, and Metrics.",
+    "keywords": ["php", "pest", "testing", "plugin", "visualizations", "dashworthy"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Leach",
+            "email": "andrew@leachcreative.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin": "^4.0",
+        "dashworthy/visualizations": "^1.1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0||^10.0",
+        "pestphp/pest-dev-tools": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dashworthy\\PestPluginVisualizations\\": "src/"
+        },
+        "files": [
+            "src/Autoload.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dashworthy\\PestPluginVisualizations\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest --colors=always"
+    }
+}
