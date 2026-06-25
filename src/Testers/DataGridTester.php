@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dashworthy\PestPluginVisualizations\Testers;
 
 use Closure;
+use Dashworthy\PestPluginVisualizations\Concerns\ResolvesVisualizableFields;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,8 @@ use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
 
 final class DataGridTester
 {
+    use ResolvesVisualizableFields;
+
     private DataGrid $dataGrid;
 
     private VisualizationData $visualizationData;
@@ -41,8 +44,7 @@ final class DataGridTester
 
     public function assertMissingColumn(string $field): static
     {
-        $column = $this->dataGrid->getColumns()
-            ->first(fn ($c) => $c->getField() === $field);
+        $column = $this->findByField($this->dataGrid->getColumns(), $field);
 
         expect($column)->toBeNull("Column [{$field}] was found but should not exist in the DataGrid schema.");
 
@@ -107,8 +109,7 @@ final class DataGridTester
 
     public function assertHasFloatingFilter(string $field): static
     {
-        $filter = $this->dataGrid->getFloatingFilters()
-            ->first(fn ($f) => $f->getField() === $field);
+        $filter = $this->findByField($this->dataGrid->getFloatingFilters(), $field);
 
         if ($filter === null) {
             test()->fail("Floating filter [{$field}] was not found in the DataGrid schema.");
@@ -121,8 +122,7 @@ final class DataGridTester
 
     public function assertMissingFloatingFilter(string $field): static
     {
-        $filter = $this->dataGrid->getFloatingFilters()
-            ->first(fn ($f) => $f->getField() === $field);
+        $filter = $this->findByField($this->dataGrid->getFloatingFilters(), $field);
 
         expect($filter)->toBeNull("Floating filter [{$field}] was found but should not exist.");
 
@@ -164,6 +164,7 @@ final class DataGridTester
     public function assertRowMatches(array $expected): static
     {
         $results = $this->runQuery();
+        $expected = $this->resolveExpectedRow($expected, $this->dataGrid->getVisualizables());
         $filtered = $results;
 
         foreach ($expected as $key => $value) {
@@ -187,6 +188,7 @@ final class DataGridTester
     public function assertRowMissing(array $expected): static
     {
         $results = $this->runQuery();
+        $expected = $this->resolveExpectedRow($expected, $this->dataGrid->getVisualizables());
         $filtered = $results;
 
         foreach ($expected as $key => $value) {
@@ -209,9 +211,12 @@ final class DataGridTester
 
     private function buildQuery(): Builder
     {
+        $visualizables = $this->dataGrid->getVisualizables();
+        $this->resolveVisualizationData($this->visualizationData, $visualizables);
+
         return GenerateVisualizationQuery::make()->handle(
             $this->dataGrid->getQuery(),
-            $this->dataGrid->getVisualizables(),
+            $visualizables,
             $this->visualizationData
         );
     }
@@ -225,8 +230,7 @@ final class DataGridTester
 
     private function findColumn(string $field): array
     {
-        $column = $this->dataGrid->getColumns()
-            ->first(fn ($c) => $c->getField() === $field);
+        $column = $this->findByField($this->dataGrid->getColumns(), $field);
 
         if ($column === null) {
             test()->fail("Column [{$field}] was not found in the DataGrid schema.");

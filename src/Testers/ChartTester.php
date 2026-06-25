@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dashworthy\PestPluginVisualizations\Testers;
 
 use Closure;
+use Dashworthy\PestPluginVisualizations\Concerns\ResolvesVisualizableFields;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,8 @@ use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
 
 final class ChartTester
 {
+    use ResolvesVisualizableFields;
+
     private Chart $chart;
 
     private VisualizationData $visualizationData;
@@ -57,7 +60,7 @@ final class ChartTester
             test()->fail("Chart has no label (uses NullLabel). Label [{$field}] was not found.");
         }
 
-        if ($label->getField() !== $field) {
+        if (! $this->matchesField($label, $field)) {
             test()->fail("Label [{$field}] was not found. Found: [{$label->getField()}].");
         }
 
@@ -75,8 +78,7 @@ final class ChartTester
 
     public function assertHasDataset(string $field): static
     {
-        $dataset = $this->chart->getDatasets()
-            ->first(fn ($d) => $d->getField() === $field);
+        $dataset = $this->findByField($this->chart->getDatasets(), $field);
 
         if ($dataset === null) {
             test()->fail("Dataset [{$field}] was not found in the Chart schema.");
@@ -89,8 +91,7 @@ final class ChartTester
 
     public function assertMissingDataset(string $field): static
     {
-        $dataset = $this->chart->getDatasets()
-            ->first(fn ($d) => $d->getField() === $field);
+        $dataset = $this->findByField($this->chart->getDatasets(), $field);
 
         expect($dataset)->toBeNull("Dataset [{$field}] was found but should not exist.");
 
@@ -106,8 +107,7 @@ final class ChartTester
 
     public function assertHasFloatingFilter(string $field): static
     {
-        $filter = $this->chart->getFloatingFilters()
-            ->first(fn ($f) => $f->getField() === $field);
+        $filter = $this->findByField($this->chart->getFloatingFilters(), $field);
 
         if ($filter === null) {
             test()->fail("Floating filter [{$field}] was not found in the Chart schema.");
@@ -120,8 +120,7 @@ final class ChartTester
 
     public function assertMissingFloatingFilter(string $field): static
     {
-        $filter = $this->chart->getFloatingFilters()
-            ->first(fn ($f) => $f->getField() === $field);
+        $filter = $this->findByField($this->chart->getFloatingFilters(), $field);
 
         expect($filter)->toBeNull("Floating filter [{$field}] was found but should not exist.");
 
@@ -147,6 +146,7 @@ final class ChartTester
     public function assertResultContains(array $expected): static
     {
         $results = $this->runQuery();
+        $expected = $this->resolveExpectedRow($expected, $this->chart->getVisualizables());
         $filtered = $results;
 
         foreach ($expected as $key => $value) {
@@ -170,6 +170,7 @@ final class ChartTester
     public function assertResultMissing(array $expected): static
     {
         $results = $this->runQuery();
+        $expected = $this->resolveExpectedRow($expected, $this->chart->getVisualizables());
         $filtered = $results;
 
         foreach ($expected as $key => $value) {
@@ -192,9 +193,12 @@ final class ChartTester
 
     private function buildQuery(): Builder
     {
+        $visualizables = $this->chart->getVisualizables();
+        $this->resolveVisualizationData($this->visualizationData, $visualizables);
+
         return GenerateVisualizationQuery::make()->handle(
             $this->chart->getQuery(),
-            $this->chart->getVisualizables(),
+            $visualizables,
             $this->visualizationData
         );
     }
