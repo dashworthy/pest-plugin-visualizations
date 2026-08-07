@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace Dashworthy\PestPluginVisualizations\Testers;
 
 use Closure;
+use Dashworthy\PestPluginVisualizations\Concerns\AssertsVisualizationEndpoints;
 use Dashworthy\PestPluginVisualizations\Concerns\ResolvesVisualizableFields;
-use Illuminate\Database\Query\Builder;
+use Dashworthy\Visualizations\Contracts\VisualizationContract;
 use Dashworthy\Visualizations\Data\VisualizationData;
 use Dashworthy\Visualizations\Metrics\Abstracts\Metric;
 use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
+use Illuminate\Database\Query\Builder;
 
 final class MetricTester
 {
+    use AssertsVisualizationEndpoints;
     use ResolvesVisualizableFields;
 
     private Metric $metric;
@@ -108,5 +111,10 @@ final class MetricTester
             $visualizables,
             $this->visualizationData
         );
+    }
+
+    protected function visualization(): VisualizationContract
+    {
+        return $this->metric;
     }
 }
