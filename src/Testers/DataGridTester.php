@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace Dashworthy\PestPluginVisualizations\Testers;
 
 use Closure;
+use Dashworthy\PestPluginVisualizations\Concerns\AssertsVisualizationEndpoints;
 use Dashworthy\PestPluginVisualizations\Concerns\ResolvesVisualizableFields;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
+use Dashworthy\Visualizations\Contracts\VisualizationContract;
 use Dashworthy\Visualizations\Data\VisualizationData;
 use Dashworthy\Visualizations\DataGrids\Abstracts\DataGrid;
 use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 final class DataGridTester
 {
+    use AssertsVisualizationEndpoints;
     use ResolvesVisualizableFields;
 
     private DataGrid $dataGrid;
@@ -237,5 +240,10 @@ final class DataGridTester
         }
 
         return $column->toArray();
+    }
+
+    protected function visualization(): VisualizationContract
+    {
+        return $this->dataGrid;
     }
 }

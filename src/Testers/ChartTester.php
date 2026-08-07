@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace Dashworthy\PestPluginVisualizations\Testers;
 
 use Closure;
+use Dashworthy\PestPluginVisualizations\Concerns\AssertsVisualizationEndpoints;
 use Dashworthy\PestPluginVisualizations\Concerns\ResolvesVisualizableFields;
+use Dashworthy\Visualizations\Charts\Abstracts\Chart;
+use Dashworthy\Visualizations\Charts\Labels\NullLabel;
+use Dashworthy\Visualizations\Contracts\VisualizationContract;
+use Dashworthy\Visualizations\Data\VisualizationData;
+use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Dashworthy\Visualizations\Charts\Abstracts\Chart;
-use Dashworthy\Visualizations\Charts\Labels\NullLabel;
-use Dashworthy\Visualizations\Data\VisualizationData;
-use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
 
 final class ChartTester
 {
+    use AssertsVisualizationEndpoints;
     use ResolvesVisualizableFields;
 
     private Chart $chart;
@@ -208,5 +211,10 @@ final class ChartTester
         return $this->buildQuery()
             ->get()
             ->map(fn ($row): array => (array) $row);
+    }
+
+    protected function visualization(): VisualizationContract
+    {
+        return $this->chart;
     }
 }
