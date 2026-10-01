@@ -28,10 +28,17 @@ class TestCase extends Orchestra
             $table->decimal('total', 10, 2)->default(0);
             $table->decimal('refunds', 10, 2)->default(0);
         });
+
+        Schema::create('nicknames', function (Blueprint $table): void {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->string('nickname');
+        });
     }
 
     protected function tearDown(): void
     {
+        Schema::dropIfExists('nicknames');
         Schema::dropIfExists('orders');
         Schema::dropIfExists('users');
         parent::tearDown();

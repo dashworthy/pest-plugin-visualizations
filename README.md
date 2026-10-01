@@ -1,8 +1,8 @@
 ![Visualizations](art/banner.svg)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/dashworthy/pest-plugin-visualizations.svg?style=flat-square)](https://packagist.org/packages/dashworthy/pest-plugin-visualizations)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/dashworthy/pest-plugin-visualizations/run-tests.yml?branch=0.x&label=tests&style=flat-square)](https://github.com/dashworthy/pest-plugin-visualizations/actions?query=workflow%3Arun-tests+branch%3A0.x)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/dashworthy/pest-plugin-visualizations/fix-php-code-style-issues.yml?branch=0.x&label=code%20style&style=flat-square)](https://github.com/dashworthy/pest-plugin-visualizations/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3A0.x)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/dashworthy/pest-plugin-visualizations/run-tests.yml?branch=1.x&label=tests&style=flat-square)](https://github.com/dashworthy/pest-plugin-visualizations/actions?query=workflow%3Arun-tests+branch%3A1.x)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/dashworthy/pest-plugin-visualizations/fix-php-code-style-issues.yml?branch=1.x&label=code%20style&style=flat-square)](https://github.com/dashworthy/pest-plugin-visualizations/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3A1.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/dashworthy/pest-plugin-visualizations.svg?style=flat-square)](https://packagist.org/packages/dashworthy/pest-plugin-visualizations)
 
 A [Pest](https://pestphp.com) plugin for testing [Dashworthy Visualizations](https://github.com/dashworthy/visualizations) — expressive, chainable assertions for DataGrids, Charts, and Metrics.
@@ -52,6 +52,7 @@ it('has the expected schema', function () {
 | `assertColumnIsVisible(string $field)` | Assert the column is visible (not hidden) |
 | `assertColumnIsHidden(string $field)` | Assert the column is hidden |
 | `assertColumnIsRowKey(string $field)` | Assert the column is marked as the row key |
+| `assertColumnIsHydrated(string $field)` | Assert the column is a `HydratedColumn`, filled after the page is fetched |
 | `assertHasFloatingFilter(string $field)` | Assert a floating filter with the given field name exists |
 | `assertMissingFloatingFilter(string $field)` | Assert no floating filter with the given field name exists |
 
@@ -99,6 +100,8 @@ it('sorts results correctly', function () {
 | `assertNoResults()` | Assert the query returns no rows |
 | `assertRowMatches(array $expected)` | Assert at least one row matches all given key/value pairs |
 | `assertRowMissing(array $expected)` | Assert no row matches all given key/value pairs |
+
+The row assertions see each row as the data endpoint returns it: the grid's hydrated columns are filled after the statement runs, so a `HydratedColumn` can be matched like any other column. `assertRowCount()` and `assertNoResults()` count the statement's rows and do not hydrate.
 
 ---
 

@@ -10,6 +10,7 @@ use Dashworthy\PestPluginVisualizations\Concerns\ResolvesVisualizableFields;
 use Dashworthy\Visualizations\Contracts\VisualizationContract;
 use Dashworthy\Visualizations\Data\VisualizationData;
 use Dashworthy\Visualizations\DataGrids\Abstracts\DataGrid;
+use Dashworthy\Visualizations\DataGrids\Columns\HydratedColumn;
 use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
@@ -106,6 +107,19 @@ final class DataGridTester
     public function assertColumnIsRowKey(string $field): static
     {
         expect($this->findColumn($field)['is_row_key'])->toBeTrue("Column [{$field}] is not a row key.");
+
+        return $this;
+    }
+
+    public function assertColumnIsHydrated(string $field): static
+    {
+        $column = $this->findByField($this->dataGrid->getColumns(), $field);
+
+        if ($column === null) {
+            test()->fail("Column [{$field}] was not found in the DataGrid schema.");
+        }
+
+        expect($column)->toBeInstanceOf(HydratedColumn::class, "Column [{$field}] is not hydrated.");
 
         return $this;
     }
@@ -224,10 +238,13 @@ final class DataGridTester
         );
     }
 
+    /**
+     * The rows as the data endpoint returns them: the statement's results, then the grid's
+     * hydrated columns filled on top.
+     */
     private function runQuery(): Collection
     {
-        return $this->buildQuery()
-            ->get()
+        return $this->dataGrid->hydrate($this->buildQuery()->get())
             ->map(fn ($row): array => (array) $row);
     }
 
