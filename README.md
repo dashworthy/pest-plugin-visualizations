@@ -1,8 +1,7 @@
-![Visualizations](art/banner.svg)
+![pest-plugin-visualizations — Fluent Pest assertions for DataGrids, Charts and Metrics.](art/banner.svg)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/dashworthy/pest-plugin-visualizations.svg?style=flat-square)](https://packagist.org/packages/dashworthy/pest-plugin-visualizations)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/dashworthy/pest-plugin-visualizations/run-tests.yml?branch=1.x&label=tests&style=flat-square)](https://github.com/dashworthy/pest-plugin-visualizations/actions?query=workflow%3Arun-tests+branch%3A1.x)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/dashworthy/pest-plugin-visualizations/fix-php-code-style-issues.yml?branch=1.x&label=code%20style&style=flat-square)](https://github.com/dashworthy/pest-plugin-visualizations/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3A1.x)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/dashworthy/pest-plugin-visualizations/tests.yml?branch=1.x&label=tests&style=flat-square)](https://github.com/dashworthy/pest-plugin-visualizations/actions/workflows/tests.yml?query=branch%3A1.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/dashworthy/pest-plugin-visualizations.svg?style=flat-square)](https://packagist.org/packages/dashworthy/pest-plugin-visualizations)
 
 A [Pest](https://pestphp.com) plugin for testing [Dashworthy Visualizations](https://github.com/dashworthy/visualizations) — expressive, chainable assertions for DataGrids, Charts, and Metrics.
