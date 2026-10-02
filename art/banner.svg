@@ -1,47 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="pest-plugin-visualizations — Fluent Pest assertions for DataGrids, Charts and Metrics.">
+  <metadata id="banner-spec">{"name": "pest-plugin-visualizations", "tagline": "Fluent Pest assertions for DataGrids, Charts and Metrics.", "accent": ["#8B5CF6", "#0EA5E9"], "motif": "&lt;line x1='884' y1='142' x2='884' y2='238' stroke='#94A3B8' stroke-width='2.5' opacity='0.5'/&gt;&lt;g font-family='{mono}' font-size='13' fill='#94A3B8' opacity='0.75'&gt;&lt;text x='872' y='128'&gt;dataGrid(Users::class)&lt;/text&gt;&lt;text x='900' y='164'&gt;-&gt;assertHasColumn('Name')&lt;/text&gt;&lt;text x='900' y='196'&gt;-&gt;usingSorts($sort)&lt;/text&gt;&lt;/g&gt;&lt;rect x='892' y='210' width='186' height='28' rx='6' fill='#0EA5E9' fill-opacity='0.08' stroke='url(#accent)' stroke-width='3' stroke-dasharray='6 5'/&gt;&lt;text x='900' y='229' font-family='{mono}' font-size='13' fill='#F1F5F9'&gt;-&gt;assertRowCount(1)&lt;/text&gt;&lt;text x='900' y='274' font-family='{mono}' font-size='12' fill='#64748B'&gt;✓ 1 passed (3 assertions)&lt;/text&gt;"}</metadata>
   <defs>
     <radialGradient id="glow" cx="50%" cy="0%" r="70%">
-      <stop offset="0%" stop-color="#10B981" stop-opacity="0.35" />
-      <stop offset="60%" stop-color="#0EA5E9" stop-opacity="0.12" />
-      <stop offset="100%" stop-color="#0B1120" stop-opacity="0" />
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#0EA5E9" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0B1120" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#10B981" />
-      <stop offset="100%" stop-color="#0EA5E9" />
+      <stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#0EA5E9"/>
     </linearGradient>
     <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#1E293B" stroke-width="1" />
+      <path d="M48 0 L0 0 0 48" fill="none" stroke="#1E293B" stroke-width="1"/>
     </pattern>
   </defs>
-
-  <rect width="1200" height="400" fill="#0B1120" />
-  <rect width="1200" height="400" fill="url(#grid)" opacity="0.5" />
-  <rect width="1200" height="400" fill="url(#glow)" />
-
-  <text
-    x="72" y="255"
-    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    font-size="100" font-weight="800" letter-spacing="-0.04em"
-    fill="url(#accent)">Visualizations</text>
-
-  <text
-    x="76" y="296"
-    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    font-size="22" font-weight="400"
-    fill="#94A3B8">Charts, DataGrids, and Metrics as PHP classes for Laravel</text>
-
-  <text
-    x="1180" y="344"
-    text-anchor="end"
-    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    font-size="9" font-weight="800" font-style="italic" letter-spacing="0.02em"
-    fill="#94A3B8">CRAFTED BY</text>
-
-  <text
-    x="1180" y="362"
-    text-anchor="end"
-    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    font-size="20" font-weight="900" font-style="italic" letter-spacing="-0.07em">
-    <tspan fill="#F1F5F9">DASH</tspan><tspan fill="#0EA5E9">WORTHY</tspan>
-  </text>
+  <rect width="1200" height="400" fill="#0B1120"/>
+  <rect width="1200" height="400" fill="url(#grid)" opacity="0.5"/>
+  <rect width="1200" height="400" fill="url(#glow)"/>
+  <g id="motif">
+<line x1='884' y1='142' x2='884' y2='238' stroke='#94A3B8' stroke-width='2.5' opacity='0.5'/><g font-family='ui-monospace,SFMono-Regular,Menlo,monospace' font-size='13' fill='#94A3B8' opacity='0.75'><text x='872' y='128'>dataGrid(Users::class)</text><text x='900' y='164'>->assertHasColumn('Name')</text><text x='900' y='196'>->usingSorts($sort)</text></g><rect x='892' y='210' width='186' height='28' rx='6' fill='#0EA5E9' fill-opacity='0.08' stroke='url(#accent)' stroke-width='3' stroke-dasharray='6 5'/><text x='900' y='229' font-family='ui-monospace,SFMono-Regular,Menlo,monospace' font-size='13' fill='#F1F5F9'>->assertRowCount(1)</text><text x='900' y='274' font-family='ui-monospace,SFMono-Regular,Menlo,monospace' font-size='12' fill='#64748B'>✓ 1 passed (3 assertions)</text>
+  </g>
+  <text x="72" y="255" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="66" font-weight="800" letter-spacing="-0.04em" fill="url(#accent)">pest-plugin-visualizations</text>
+  <text x="76" y="296" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="24" font-weight="400" fill="#94A3B8">Fluent Pest assertions for DataGrids, Charts and Metrics.</text>
+  <text x="1180" y="344" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="800" font-style="italic" letter-spacing="0.02em" fill="#94A3B8">CRAFTED BY</text>
+  <text x="1180" y="362" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="20" font-weight="900" font-style="italic" letter-spacing="-0.07em"><tspan fill="url(#accent)">DASHWORTHY</tspan></text>
 </svg>
