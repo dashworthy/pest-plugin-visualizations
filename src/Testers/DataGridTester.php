@@ -110,6 +110,19 @@ final class DataGridTester
         return $this;
     }
 
+    public function assertColumnIsHydrated(string $field): static
+    {
+        $column = $this->findByField($this->dataGrid->getColumns(), $field);
+
+        if ($column === null) {
+            test()->fail("Column [{$field}] was not found in the DataGrid schema.");
+        }
+
+        expect($column->hasExpression())->toBeFalse("Column [{$field}] is not hydrated.");
+
+        return $this;
+    }
+
     public function assertHasFloatingFilter(string $field): static
     {
         $filter = $this->findByField($this->dataGrid->getFloatingFilters(), $field);
@@ -224,10 +237,13 @@ final class DataGridTester
         );
     }
 
+    /**
+     * The rows as the data endpoint returns them: the statement's results, then the grid's
+     * hydrated columns filled on top.
+     */
     private function runQuery(): Collection
     {
-        return $this->buildQuery()
-            ->get()
+        return $this->dataGrid->hydrate($this->buildQuery()->get())
             ->map(fn ($row): array => (array) $row);
     }
 

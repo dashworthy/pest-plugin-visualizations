@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34d908ecc5c88dce537404d4c24009e1",
+    "content-hash": "8b99ba06373dbb720938419c1791c859",
     "packages": [
         {
             "name": "brianium/paratest",
@@ -372,16 +372,16 @@
         },
         {
             "name": "dashworthy/visualizations",
-            "version": "0.1.0",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashworthy/visualizations.git",
-                "reference": "e132eaa14f6a51031efb27e22954197808bebd2c"
+                "reference": "348c1e18179c26f1ae6563c6bdd7262945c7fef4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashworthy/visualizations/zipball/e132eaa14f6a51031efb27e22954197808bebd2c",
-                "reference": "e132eaa14f6a51031efb27e22954197808bebd2c",
+                "url": "https://api.github.com/repos/dashworthy/visualizations/zipball/348c1e18179c26f1ae6563c6bdd7262945c7fef4",
+                "reference": "348c1e18179c26f1ae6563c6bdd7262945c7fef4",
                 "shasum": ""
             },
             "require": {
@@ -437,7 +437,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dashworthy/visualizations/issues",
-                "source": "https://github.com/dashworthy/visualizations/tree/0.1.0"
+                "source": "https://github.com/dashworthy/visualizations/tree/1.x"
             },
             "funding": [
                 {
@@ -445,7 +445,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-15T14:42:52+00:00"
+            "time": "2026-10-02T15:09:10+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
