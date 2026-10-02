@@ -52,7 +52,7 @@ it('has the expected schema', function () {
 | `assertColumnIsVisible(string $field)` | Assert the column is visible (not hidden) |
 | `assertColumnIsHidden(string $field)` | Assert the column is hidden |
 | `assertColumnIsRowKey(string $field)` | Assert the column is marked as the row key |
-| `assertColumnIsHydrated(string $field)` | Assert the column is a `HydratedColumn`, filled after the page is fetched |
+| `assertColumnIsHydrated(string $field)` | Assert the column was declared with a hydrator in place of SQL, so it is filled after the page is fetched |
 | `assertHasFloatingFilter(string $field)` | Assert a floating filter with the given field name exists |
 | `assertMissingFloatingFilter(string $field)` | Assert no floating filter with the given field name exists |
 
@@ -101,7 +101,7 @@ it('sorts results correctly', function () {
 | `assertRowMatches(array $expected)` | Assert at least one row matches all given key/value pairs |
 | `assertRowMissing(array $expected)` | Assert no row matches all given key/value pairs |
 
-The row assertions see each row as the data endpoint returns it: the grid's hydrated columns are filled after the statement runs, so a `HydratedColumn` can be matched like any other column. `assertRowCount()` and `assertNoResults()` count the statement's rows and do not hydrate.
+The row assertions see each row as the data endpoint returns it: the grid's hydrated columns are filled after the statement runs, so a column declared with a hydrator can be matched like any other column. `assertRowCount()` and `assertNoResults()` count the statement's rows and do not hydrate.
 
 ---
 

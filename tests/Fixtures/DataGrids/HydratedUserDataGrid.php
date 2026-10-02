@@ -6,7 +6,6 @@ namespace Dashworthy\PestPluginVisualizations\Tests\Fixtures\DataGrids;
 
 use Dashworthy\PestPluginVisualizations\Tests\Fixtures\Hydrators\NicknameHydrator;
 use Dashworthy\Visualizations\DataGrids\Abstracts\DataGrid;
-use Dashworthy\Visualizations\DataGrids\Columns\HydratedColumn;
 use Dashworthy\Visualizations\DataGrids\Columns\Number;
 use Dashworthy\Visualizations\DataGrids\Columns\Text;
 use Illuminate\Database\Query\Builder;
@@ -20,7 +19,7 @@ class HydratedUserDataGrid extends DataGrid
         return collect([
             Number::make('users.id', 'ID')->asRowKey(),
             Text::make('users.name', 'Name'),
-            HydratedColumn::for(NicknameHydrator::class, 'Nickname'),
+            Text::make(NicknameHydrator::class, 'Nickname'),
         ]);
     }
 

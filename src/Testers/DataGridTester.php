@@ -10,7 +10,6 @@ use Dashworthy\PestPluginVisualizations\Concerns\ResolvesVisualizableFields;
 use Dashworthy\Visualizations\Contracts\VisualizationContract;
 use Dashworthy\Visualizations\Data\VisualizationData;
 use Dashworthy\Visualizations\DataGrids\Abstracts\DataGrid;
-use Dashworthy\Visualizations\DataGrids\Columns\HydratedColumn;
 use Dashworthy\Visualizations\Query\GenerateVisualizationQuery;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
@@ -119,7 +118,7 @@ final class DataGridTester
             test()->fail("Column [{$field}] was not found in the DataGrid schema.");
         }
 
-        expect($column)->toBeInstanceOf(HydratedColumn::class, "Column [{$field}] is not hydrated.");
+        expect($column->hasExpression())->toBeFalse("Column [{$field}] is not hydrated.");
 
         return $this;
     }
